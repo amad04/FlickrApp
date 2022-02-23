@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     let searchbar: UISearchBar = {
         let sb = UISearchBar()
         sb.translatesAutoresizingMaskIntoConstraints = false
+        sb.placeholder = "Search for Photo"
         return sb
     }()
 
@@ -35,7 +36,7 @@ class ViewController: UIViewController {
         return cv
     }()
 
-    var spinner: UIActivityIndicatorView = {
+    let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.style = .large
@@ -69,8 +70,8 @@ class ViewController: UIViewController {
     
     func setupConstrains() {
         searchbar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        searchbar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        searchbar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        searchbar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        searchbar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         
         collectionView.topAnchor.constraint(equalTo: searchbar.bottomAnchor, constant: 10).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -121,7 +122,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
 
         let selectedPhoto = self.photoArray[indexPath.row]
 
-        detailVC.titleLabel.text = selectedPhoto.title
+        detailVC.descriptionLabel.text = selectedPhoto.title
         detailVC.imageView.image = img
 
         present(detailVC, animated: true, completion: nil)

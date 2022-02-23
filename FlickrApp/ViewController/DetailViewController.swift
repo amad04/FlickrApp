@@ -9,25 +9,43 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    let titleLabel: UILabel = {
+    let stackView: UIStackView = {
+         let sv = UIStackView()
+         sv.translatesAutoresizingMaskIntoConstraints = false
+         sv.axis = .vertical
+         sv.alignment = .center
+         sv.spacing = 20
+         return sv
+     }()
+
+    let headerLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .center
         lbl.backgroundColor = .white
-        lbl.numberOfLines = 2
-        lbl.layer.cornerRadius = 5
-        lbl.clipsToBounds = true
+        lbl.numberOfLines = 0
+        lbl.text = "Photo with description"
+        lbl.font = UIFont.boldSystemFont(ofSize: 20)
         return lbl
     }()
 
-    var imageView: UIImageView = {
+
+    let imageView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFill
         imgView.layer.cornerRadius = 5
         imgView.clipsToBounds = true
-        imgView.backgroundColor = .blue
         return imgView
+    }()
+
+    let descriptionLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textAlignment = .center
+        lbl.backgroundColor = .white
+        lbl.numberOfLines = 0
+        return lbl
     }()
 
     override func viewDidLoad() {
@@ -35,22 +53,23 @@ class DetailViewController: UIViewController {
 
         setupViews()
     }
-    
+
     func setupViews(){
         view.backgroundColor = .white
-        view.addSubview(titleLabel)
-        view.addSubview(imageView)
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(headerLabel)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(descriptionLabel)
 
         setupConstrains()
     }
-    
-    func setupConstrains() {
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
 
-        imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    func setupConstrains() {
+        stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        stackView.setCustomSpacing(60, after: headerLabel)
+
         imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
